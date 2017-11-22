@@ -10,6 +10,7 @@ services:
             - "80"
         ports:
             - "0.0.0.0:8001:8001"
+            - "0.0.0.0:8001:8001/udp"
 
     v2ray_nginx:
         build: $PWD/nginx
