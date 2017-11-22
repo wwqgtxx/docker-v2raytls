@@ -18,6 +18,8 @@ RUN mkdir -p /etc/letsencrypt/webrootauth
 COPY entrypoint.sh /opt/entrypoint.sh
 ADD templates /templates
 
+RUN chmod +x /opt/entrypoint.sh
+
 # There is an expose in nginx:alpine image
 # EXPOSE 80 443
 
