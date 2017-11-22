@@ -1,0 +1,31 @@
+version: "2"
+services:
+    v2ray_main:
+        image: v2ray/official
+        container_name: v2ray_main
+        restart: always
+        volumes:
+            - $PWD/config.json:/etc/v2ray/config.json
+        expose:
+            - "80"
+        ports:
+            - "0.0.0.0:8001:8001"
+
+    v2ray_nginx:
+        build: $PWD/nginx
+        container_name: v2ray_nginx
+        restart: always
+        links:
+            - v2ray_main
+        volumes:
+            - $PWD/data/letsencrypt:/etc/letsencrypt
+            - $PWD/data/letsencrypt-backups:/var/lib/letsencrypt
+            - $PWD/data/dhparam-cache:/cache
+        environment:
+            - EMAIL=me@email.com
+            - DOMAIN=mydomain.horse
+            - V2RAY_URL=v2ray
+            - UPSTREAM=v2ray_main:80
+        ports:
+            - "0.0.0.0:80:80"
+            - "0.0.0.0:443:443"
