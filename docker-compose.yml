@@ -1,17 +1,17 @@
 version: "2"
 services:
     v2ray_main:
-        image: v2ray/official
+        image: $PWD/v2ray
         container_name: v2ray_main
         restart: always
-        volumes:
-            - $PWD/config.json:/etc/v2ray/config.json
+        environment:
+            - UUID=23ad6b10-8d1a-40f7-8ad0-e3e35cd38297
         expose:
             - "80"
         ports:
             - "0.0.0.0:8001:8001"
             - "0.0.0.0:8001:8001/udp"
-
+            - "0.0.0.0:443:443/udp"
     v2ray_nginx:
         build: $PWD/nginx
         container_name: v2ray_nginx

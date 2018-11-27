@@ -1,0 +1,101 @@
+{
+  "log" : {
+    "access": "",
+    "error": "",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 8001,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${UUID}",
+            "level": 1,
+            "alterId": 64
+          }
+        ]
+      }
+    },
+    {
+      "port": 8001,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${UUID}",
+            "level": 1,
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+         "network": "kcp"
+      }
+    },
+    {
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${UUID}",
+            "level": 1,
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+         "network": "quic"
+      }
+    },
+    {
+      "port": 80,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${UUID}",
+            "level": 1,
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+         "network": "ws",
+         "wsSettings": {
+            "connectionReuse": true,
+            "path": "/"
+         }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
+      }
+    ]
+  },
+  "transport": {
+    "kcpSettings": {
+      "uplinkCapacity": 100,
+      "downlinkCapacity": 100,
+      "congestion": true
+    }
+  }
+}
