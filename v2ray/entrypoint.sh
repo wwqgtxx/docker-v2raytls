@@ -15,10 +15,11 @@ if [ "${MISSING}" != "" ]; then
   exit 1 
   fi
 
-# Generate strong DH parameters for nginx, if they don't already exist.
 if [ -f /etc/v2ray/config.json ]; then
   rm /etc/v2ray/config.json
 fi
+
+mkdir /etc/v2ray/ -p
 
 sed -e "s/\${UUID}/${UUID}/" \
   "/opt/config.json" > /etc/v2ray/config.json
