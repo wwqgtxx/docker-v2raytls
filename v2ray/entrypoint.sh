@@ -21,9 +21,9 @@ fi
 
 mkdir /etc/v2ray/ -p
 
-sed -e "s/\${UUID}/${UUID}/" \
-  "/opt/config.json" > /etc/v2ray/config.json
+cd /etc/v2ray/
 
-v2ray.location.asset="/etc/v2ray/config.json"
+sed -e "s/\${UUID}/${UUID}/" \
+  "/opt/config.json" > config.json
 
 exec -a "${V2RAY_NAME}" v2ray
