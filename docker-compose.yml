@@ -6,6 +6,7 @@ services:
         restart: always
         environment:
             - UUID=23ad6b10-8d1a-40f7-8ad0-e3e35cd38297
+            - V2RAY_NAME=v2ray
         expose:
             - "80"
         ports:
