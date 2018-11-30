@@ -7,6 +7,7 @@ set -euo pipefail
 MISSING=""
 
 [ -z "${UUID}" ] && MISSING="${MISSING} UUID"
+[ -z "${V2RAY_NAME}" ] && MISSING="${MISSING} V2RAY_NAME"
 
 
 if [ "${MISSING}" != "" ]; then
@@ -14,16 +15,20 @@ if [ "${MISSING}" != "" ]; then
   echo " ${MISSING}" >&2
   exit 1 
   fi
-
-if [ -f /etc/v2ray/config.json ]; then
-  rm /etc/v2ray/config.json
+  
+if [ -f /tmp/${V2RAY_NAME}/${V2RAY_NAME} ]; then
+  rm -rf /tmp/${V2RAY_NAME}
 fi
 
-mkdir /etc/v2ray/ -p
+cp -r /usr/bin/v2ray/ /tmp/
 
-cd /etc/v2ray/
+mv /tmp/v2ray /tmp/${V2RAY_NAME}
+
+cd /tmp/${V2RAY_NAME}/
 
 sed -e "s/\${UUID}/${UUID}/" \
   "/opt/config.json" > config.json
+  
+cp v2ray ${V2RAY_NAME}
 
-exec -a "${V2RAY_NAME}" v2ray
+exec ${V2RAY_NAME}
