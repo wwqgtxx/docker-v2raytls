@@ -17,11 +17,7 @@ COPY --from=builder /usr/bin/v2ray/geosite.dat /usr/bin/v2ray/
 COPY entrypoint.sh /opt/entrypoint.sh
 COPY config.json /opt/config.json
 
-RUN set -ex && \
-    mkdir /var/log/v2ray/ &&\
-    chmod +x /usr/bin/v2ray/v2ctl && \
-    chmod +x /usr/bin/v2ray/v2ray && \
-    chmod +x /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
 
 ENV PATH /usr/bin/v2ray:$PATH
 
