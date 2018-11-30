@@ -1,4 +1,11 @@
-FROM v2ray/official as builder
+FROM ubuntu:latest as builder
+ARG V2RAY_VERSION
+
+RUN apt-get update
+RUN apt-get install curl -y
+RUN curl -L -o /tmp/go.sh https://install.direct/go.sh
+RUN chmod +x /tmp/go.sh --version $V2RAY_VERSION
+RUN /tmp/go.sh
 
 FROM nginx:alpine
 MAINTAINER wwqgtxx <wwqgtxx@gmail.com>
