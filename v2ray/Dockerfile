@@ -19,6 +19,4 @@ COPY config.json /opt/config.json
 
 RUN chmod +x /opt/entrypoint.sh
 
-ENV PATH /usr/bin/v2ray:$PATH
-
 ENTRYPOINT ["/opt/entrypoint.sh"]
