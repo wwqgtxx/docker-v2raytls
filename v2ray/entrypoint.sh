@@ -33,7 +33,10 @@ cd /tmp/${V2RAY_NAME}/
 sed -e "s/\${UUID}/${UUID}/" \
   "/opt/config.json" > config.json
   
-cp v2ray ${V2RAY_NAME}
+  
+if [ "${V2RAY_NAME}" != "v2ray" ]; then
+  cp v2ray ${V2RAY_NAME} 
+  fi
 
 chmod +x ${V2RAY_NAME}
 
