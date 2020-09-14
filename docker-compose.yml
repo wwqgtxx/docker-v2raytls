@@ -4,7 +4,7 @@ services:
         build:
             context: $PWD/v2ray
             args:
-                V2RAY_VERSION: v4.26.0
+                V2RAY_VERSION: v4.28.1
         container_name: v2ray_main
         restart: always
         environment:
